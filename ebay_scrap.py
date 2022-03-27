@@ -46,8 +46,23 @@ for page in  range(1,5) :
                 
         l.append(data)
       #  print(data)
-    
-df = pd.DataFrame(l)
-df.to_excel("/Users/Pro/Documents/Master MBD/MBD_S2/Web-Scraping/Ebay_Scrap/ebay.xlsx")
 
-print(df.tail())
+ # Storing in Excel File   
+# df = pd.DataFrame(l)
+# df.to_excel("/Users/Pro/Documents/Master MBD/MBD_S2/Web-Scraping/Ebay_Scrap/ebay.xlsx")
+
+# Storing in MongoDb  
+
+from pymongo import MongoClient
+
+client = MongoClient()
+client = MongoClient('localhost', 27017 )
+
+db = client.get_database('ebay')
+
+for produit in l :
+    db.get_collection('ebayCollection').insert_one(produit)
+
+
+#print(df.tail())
+
