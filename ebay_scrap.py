@@ -32,6 +32,11 @@ for page in  range(1,5) :
             sold = detail.find('span', class_='s-item__hotness s-item__itemHotness').text
         except:
             sold ='0 sold'
+
+        # try :
+        #     disponible = info.find('div', class_='w2b-cnt w2b-3 w2b-brdr').text
+        # except:
+        #     disponible ='0'      
         try :
             delivry = detail.find('span', class_='s-item__shipping s-item__logisticsCost').text
         except:
@@ -42,26 +47,26 @@ for page in  range(1,5) :
         except:
             country =''
 
-        data = {"Title":title, "Country":country, "Price":price, "Sold":sold,"Delivry":delivry }
+        data = {"Title":title, "Country":country, "Price":price, "Sold / Available":sold,"Delivry":delivry }
                 
         l.append(data)
       #  print(data)
 
  # Storing in Excel File   
-# df = pd.DataFrame(l)
-# df.to_excel("/Users/Pro/Documents/Master MBD/MBD_S2/Web-Scraping/Ebay_Scrap/ebay.xlsx")
+df = pd.DataFrame(l)
+df.to_excel("/Users/Pro/Documents/Master MBD/MBD_S2/Web-Scraping/Ebay_Scrap/ebay2.xlsx")
 
 # Storing in MongoDb  
 
-from pymongo import MongoClient
+# from pymongo import MongoClient
 
-client = MongoClient()
-client = MongoClient('localhost', 27017 )
+# client = MongoClient()
+# client = MongoClient('localhost', 27017 )
 
-db = client.get_database('ebay')
+# db = client.get_database('ebay')
 
-for produit in l :
-    db.get_collection('ebayCollection').insert_one(produit)
+# for produit in l :
+#     db.get_collection('ebayCollection').insert_one(produit)
 
 
 #print(df.tail())
